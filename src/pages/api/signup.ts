@@ -2,7 +2,7 @@
 import { Admin } from 'db';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import jwt from "jsonwebtoken";
-import { ensureDbConnected } from '../../../lib/dbConnect';
+import dbConnect from '../../../lib/dbConnect';
 const SECRET = "srcret"
 
 type Data = {
@@ -15,10 +15,10 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Data>
 ) {
-    await ensureDbConnected();
+    console.log("handler called");
+    await dbConnect();
     const { username, password } = req.body;
     const admin = await Admin.findOne({ username })
-
     if (admin) {
         res.status(403).json({ message: 'Admin already exists' });
     } else {
@@ -28,5 +28,6 @@ export default async function handler(
 
         const token = jwt.sign({ username, role: 'admin' }, SECRET, { expiresIn: '1h' });
         res.json({ message: 'Admin created successfully', token });
+
     }
 }

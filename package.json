@@ -13,12 +13,14 @@
     "@types/node": "20.5.7",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
-    "db": "*",
+    "axios": "^1.5.0",
     "jsonwebtoken": "^9.0.2",
     "next": "13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.2.2",
-    "ui": "*"
+    "ui": "*",
+    "db": "*",
+    "store": "*"
   }
 }
